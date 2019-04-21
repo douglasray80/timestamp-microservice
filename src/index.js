@@ -11,11 +11,15 @@ app.get('/', (req, res) => {
 	res.sendFile(__dirname + 'index.html')
 })
 
+// 3. An empty timestamp should return the current datetime
+app.get('/api/timestamp', (req, res) => {
+	const now = new Date()
+	res.json({ unix: now.getTime(), utc: now.toUTCString() })
+})
+
 // 1. Create API endpoint at [project_url]/api/timestamp/:date_string?
 
 // 2. Middleware should be able to parse a unix timestamp (integer) and an ISO-8601 format date string
-
-// 3. An empty timestamp should return the current datetime
 
 // 4. A valid date should return JSON having the structure
 // {"unix": <date.getTime()>, "utc" : <date.toUTCString()> }
