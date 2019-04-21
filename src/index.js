@@ -5,6 +5,12 @@ const app = express()
 
 app.use(cors({ optionSuccessStatus: 200 }))
 
+app.use(express.static('public'))
+
+app.get('/', (req, res) => {
+	res.sendFile(__dirname + 'index.html')
+})
+
 // 1. Create API endpoint at [project_url]/api/timestamp/:date_string?
 
 // 2. Middleware should be able to parse a unix timestamp (integer) and an ISO-8601 format date string
