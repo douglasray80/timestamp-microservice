@@ -20,9 +20,19 @@ app.get('/api/timestamp', (req, res) => {
 // Create API endpoint at [project_url]/api/timestamp/:date_string?
 app.get('/api/timestamp/:date_string?', (req, res) => {
 	const { date_string } = req.params
-	console.log(date_string)
 
-	// Middleware should be able to parse a unix timestamp (integer) and an ISO-8601 format date string
+	// if date_string is a unix timestamp, convert to integer
+	const unix = parseInt(date_string * 1)
+
+	let timestamp
+	// test whether date_string is a number or a string
+	// and pass the right type to Date()
+	if (isNaN(unix)) {
+		timestamp = new Date(date_string)
+	} else {
+		timestamp = new Date(unix)
+	}
+	console.log(timestamp)
 
 	// A valid date should return JSON having the structure
 	// {"unix": <date.getTime()>, "utc" : <date.toUTCString()> }
